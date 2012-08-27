@@ -1,0 +1,4 @@
+= form_for @prompt do |f|
+  = f.text_area :content, rows: 5, cols: 40
+  = f.hidden_field :user_id, value: current_user.id
+  = f.submit

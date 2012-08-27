@@ -1,0 +1,10 @@
+Hello #{current_user.email}
+
+%h1 My Prompts
+
+%ul
+  - current_user.prompts.each do |prompt|
+    %li #{prompt.content} (x responses)
+
+
+= link_to "Create a new prompt", new_prompt_path
