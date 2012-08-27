@@ -2,8 +2,11 @@
 
 %h1 Responses
 
-- @prompt.poems.each do |poem|
-  = link_to truncate(poem.content), prompt_poem_path(@prompt.id, poem.id)
+%ul
+  - @prompt.poems.each do |poem|
+    %li
+      = link_to truncate(poem.content), prompt_poem_path(@prompt.id, poem.id)
+      (by #{poem.user.email})
 
 %hr/
 

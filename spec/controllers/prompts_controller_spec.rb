@@ -9,7 +9,7 @@ describe PromptsController do
   describe "GET 'index'" do
     it "returns http success" do
       get 'index'
-      response.should redirect_to root_path
+      response.should be_success
     end
   end
 

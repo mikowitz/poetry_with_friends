@@ -2,12 +2,11 @@ class PromptsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    # TODO: figure out what this page should be
-    redirect_to root_path
+    @prompts = Prompt.order('created_at DESC')
   end
 
   def show
-    @prompt = Prompt.find_by_id(params[:id])
+    @prompt = Prompt.where(id: params[:id]).first()
   end
 
   def new

@@ -6,7 +6,7 @@ class PoemsController < ApplicationController
   end
 
   def show
-    @poem = Poem.find_by_id(params[:id])
+    @poem = Poem.where(id: params[:id]).first()
   end
 
   def new
@@ -24,6 +24,7 @@ class PoemsController < ApplicationController
   end
 
   def edit
+    @poem = Poem.where(id: params[:id]).first()
   end
 
   def update
