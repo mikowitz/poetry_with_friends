@@ -24,8 +24,13 @@ end
 
 gem 'jquery-rails'
 
-gem 'rspec-rails'
-gem 'factory_girl_rails'
+group :development, :test do
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'factory_girl_rails'
+end
 
 group :development do
   gem 'guard'
