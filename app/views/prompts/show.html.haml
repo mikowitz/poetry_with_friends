@@ -2,3 +2,9 @@
 
 %h1 Responses
 
+- @prompt.poems.each do |poem|
+  = link_to truncate(poem.content), prompt_poem_path(@prompt.id, poem.id)
+
+%hr/
+
+= link_to "Write a poem", new_prompt_poem_path(@prompt)

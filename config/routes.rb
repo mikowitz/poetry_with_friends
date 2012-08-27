@@ -1,13 +1,20 @@
 PoetryWithFriends::Application.routes.draw do
-  get "prompts/index"
+  get "poems/index"
 
-  get "prompts/new"
+  get "poems/show"
 
-  get "prompts/create"
+  get "poems/new"
+
+  get "poems/create"
+
+  get "poems/edit"
+
+  get "poems/update"
 
   devise_for :users
-  resources :prompts
-
+  resources :prompts do
+    resources :poems
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

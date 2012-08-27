@@ -1,0 +1,5 @@
+= form_for [@prompt, @poem] do |f|
+  = render 'shared/error_messages', target: @poem
+
+  = f.text_area :content, rows: 20, cols: 50
+  = f.submit

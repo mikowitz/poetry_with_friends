@@ -4,7 +4,12 @@ Hello #{current_user.email}
 
 %ul
   - current_user.prompts.each do |prompt|
-    %li #{prompt.content} (x responses)
+    %li=link_to "#{prompt.content} (#{pluralize prompt.poems.count, "response"})", prompt_path(prompt)
+
+%h1 My Poems
+%ul
+  - current_user.poems.each do |poem|
+    %li=link_to "#{poem.content}", prompt_poem_path(poem.prompt, poem)
 
 
 = link_to "Create a new prompt", new_prompt_path

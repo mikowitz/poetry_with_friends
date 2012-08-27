@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120827000214) do
+ActiveRecord::Schema.define(:version => 20120827032516) do
+
+  create_table "poems", :force => true do |t|
+    t.text     "content",    :null => false
+    t.integer  "prompt_id",  :null => false
+    t.integer  "user_id",    :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "poems", ["prompt_id"], :name => "index_poems_on_prompt_id"
+  add_index "poems", ["user_id", "prompt_id"], :name => "index_poems_on_user_id_and_prompt_id"
+  add_index "poems", ["user_id"], :name => "index_poems_on_user_id"
 
   create_table "prompts", :force => true do |t|
     t.text     "content",    :null => false
@@ -19,6 +31,18 @@ ActiveRecord::Schema.define(:version => 20120827000214) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "responses", :force => true do |t|
+    t.text     "content"
+    t.integer  "prompt_id",  :null => false
+    t.integer  "user_id",    :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "responses", ["prompt_id"], :name => "index_responses_on_prompt_id"
+  add_index "responses", ["user_id", "prompt_id"], :name => "index_responses_on_user_id_and_prompt_id"
+  add_index "responses", ["user_id"], :name => "index_responses_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

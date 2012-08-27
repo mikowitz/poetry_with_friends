@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PromptsController do
-  before do
+  before(:each) do
     @user = FactoryGirl.create :user
     sign_in :user, @user
   end

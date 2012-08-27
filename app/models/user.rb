@@ -10,4 +10,6 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_many :prompts
+  has_many :poems
+  has_many :answered_prompts, through: :poems, source: :prompt
 end
