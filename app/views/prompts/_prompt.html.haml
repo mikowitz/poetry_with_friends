@@ -1,0 +1,6 @@
+%li.prompt{name: prompt.content.downcase}
+  =link_to "#{prompt.content} : #{prompt.created_at.strftime("%d/%m/%y")}", prompt_path(prompt)
+  (#{pluralize(prompt.poems.count, "response")})
+  - if current_user.poems.for(prompt).any?
+    - latest = current_user.poems.for(prompt).first
+    = link_to "(you responded on #{latest.created_at})", prompt_poem_path(prompt, latest)
