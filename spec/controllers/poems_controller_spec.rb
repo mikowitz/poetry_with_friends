@@ -15,8 +15,9 @@ describe PoemsController do
   end
 
   describe "GET 'show'" do
+    let(:poem) { create :poem }
     it "returns http success" do
-      get 'show'
+      get 'show', id: poem.id
       response.should be_success
     end
   end
@@ -36,7 +37,7 @@ describe PoemsController do
       end
 
       it "redirect to the show page for the poem" do
-        response.should redirect_to prompt_poem_path(prompt, @poem)
+        response.should redirect_to poem_path(@poem)
       end
 
       it "creates a new poem for the current_user" do
@@ -69,7 +70,7 @@ describe PoemsController do
     describe "GET 'update'" do
       it "returns http success" do
         post 'update', prompt_id: prompt.id, id: poem.id, poem: {content: "new content"}
-        response.should redirect_to prompt_poem_path(prompt, poem)
+        response.should redirect_to poem_path(poem)
       end
     end
   end

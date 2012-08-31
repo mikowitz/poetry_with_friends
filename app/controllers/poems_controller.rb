@@ -6,7 +6,7 @@ class PoemsController < ApplicationController
   end
 
   def show
-    @poem = Poem.where(id: params[:id]).first()
+    @poem = Poem.where(id: params[:id]).first
   end
 
   def new
@@ -18,7 +18,7 @@ class PoemsController < ApplicationController
     @poem.prompt = @prompt
     @poem.user = current_user
     if @poem.save
-      redirect_to prompt_poem_path(@prompt, @poem)
+      redirect_to poem_path(@poem)
     else
       render :new
     end
@@ -31,7 +31,7 @@ class PoemsController < ApplicationController
   def update
     @poem = Poem.find_by_id(params[:id])
     if @poem.update_attributes(params[:poem])
-      redirect_to prompt_poem_path(@prompt, @poem)
+      redirect_to poem_path(@poem)
     else
       render :new
     end
