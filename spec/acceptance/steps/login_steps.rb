@@ -1,9 +1,9 @@
-step "there is a user :email" do |email|
-  create :user, email: email
+step "there is a user :name" do |name|
+  create :user, name: name, email: "#{name.downcase}@pwf.com"
 end
 
-step "I am logged in as :email" do |email|
-  @user = send "there is a user :email", email
+step "I am logged in as :name" do |name|
+  @user = send "there is a user :name", name
   sign_in @user
 end
 

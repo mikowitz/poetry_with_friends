@@ -1,10 +1,10 @@
 #profile
-  %h2 #{@view_user.email}'s Prompts
+  %h2 #{@view_user.display_name}'s Prompts
   %ul
     - @view_user.prompts.each do |prompt|
       %li=link_to "#{prompt.content} (#{pluralize prompt.poems.count, "response"})", prompt_path(prompt)
 
-  %h2 #{@view_user.email}'s Poems
+  %h2 #{@view_user.display_name}'s Poems
   %ul
     - @view_user.poems.each do |poem|
       %li=link_to "#{poem.content}", prompt_poem_path(poem.prompt, poem)

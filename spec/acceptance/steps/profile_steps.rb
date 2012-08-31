@@ -2,8 +2,8 @@ step "I view my profile" do
   visit '/profile'
 end
 
-step "I view the profile for :email" do |email|
-  visit "/profile/#{User.where(:email => email).first.id}"
+step "I view the profile for :name" do |name|
+  visit "/profile/#{User.where(:name => name).first.id}"
 end
 
 step "I should see the header :header" do |header|
