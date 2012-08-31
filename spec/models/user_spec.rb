@@ -1,45 +1,27 @@
 require 'spec_helper'
 
 describe User do
-  before(:each) do
-    @user = FactoryGirl.create :user
-    @prompt1 = FactoryGirl.create :prompt, user: @user
-    @prompt2 = FactoryGirl.create :prompt, user: @user
+  let(:user) { create :user }
+  let(:prompt1) { create :prompt, user: user }
+  let(:prompt2) { create :prompt, user: user }
+  let(:poem1) { create :poem, user: user }
+  let(:poem2) { create :poem, user: user, prompt: prompt1 }
+
+  describe "prompts" do
+    subject { user.prompts }
+    it { should =~ [prompt1, prompt2] }
+    it { should_not include poem1.prompt }
+    it { should include poem2.prompt }
   end
 
-  it "should have many prompts" do
-    @user.reload
-    @user.prompts.should include @prompt1
-    @user.prompts.should include @prompt2
+  describe "poems" do
+    subject(:poems) { user.poems }
+
+    it { should =~ [poem1, poem2] }
   end
 
-  it "should have many poems" do
-    poem1 = FactoryGirl.create :poem, user: @user
-    poem2 = FactoryGirl.create :poem, user: @user, prompt: @prompt1
-
-    @user.reload
-
-    @user.poems.should include poem1
-    @user.poems.should include poem2
-
-    @user.prompts.should_not include poem1.prompt
-    @user.prompts.should include poem2.prompt
-
-    @user.answered_prompts.should include poem1.prompt
-    @user.answered_prompts.should include poem2.prompt
-  end
-
-  it "should know if a user has written any poems for a prompt" do
-    poem = FactoryGirl.create :poem, user: @user, prompt: @prompt1
-    poem2 = FactoryGirl.create :poem, user: @user, created_at: 2.days.ago
-    poem3 = FactoryGirl.create :poem, user: @user, prompt: poem2.prompt, created_at: 1.day.ago
-
-    @user.reload
-
-    @user.poems.for(@prompt1).should == [poem]
-    @user.poems.for(@prompt2).should be_empty
-    @user.poems.for(poem3.prompt).should == [poem3, poem2]
-
-    @user.poems.for(poem2.prompt).first().should == poem3
+  describe "answered prompts" do
+    subject { user.answered_prompts }
+    it { should =~ [poem1.prompt, poem2.prompt] }
   end
 end

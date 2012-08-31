@@ -1,9 +1,10 @@
 require 'spec_helper'
 
 describe PromptsController do
+  let(:user) { create :user }
+
   before(:each) do
-    @user = FactoryGirl.create :user
-    sign_in :user, @user
+    sign_in :user, user
   end
 
   describe "GET 'index'" do
@@ -15,7 +16,7 @@ describe PromptsController do
 
   describe "GET 'show'" do
     it "returns http success" do
-      prompt = FactoryGirl.create :prompt
+      prompt = create :prompt
       get 'show', :id => prompt.id
       response.should be_success
     end
@@ -40,7 +41,7 @@ describe PromptsController do
       end
 
       it "creates a new prompt for the current_user" do
-        @user.reload.prompts.should include @prompt
+        user.reload.prompts.should include @prompt
       end
     end
 

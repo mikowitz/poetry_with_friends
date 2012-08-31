@@ -15,6 +15,7 @@ class PoemsController < ApplicationController
 
   def create
     @poem = @prompt.poems.new(params[:poem])
+    @poem.prompt = @prompt
     @poem.user = current_user
     if @poem.save
       redirect_to prompt_poem_path(@prompt, @poem)
