@@ -30,6 +30,9 @@ end
 
 group :test do
   gem 'factory_girl_rails'
+  gem 'turnip'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 group :development do
