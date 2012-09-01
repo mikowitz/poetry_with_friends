@@ -2,7 +2,8 @@ class ProfileController < ApplicationController
   before_filter :authenticate_user!
   
   def index
-    redirect_to root_path
+    @view_user = current_user
+    render action: 'show'
   end
 
   def show

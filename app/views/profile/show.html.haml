@@ -1,13 +1,28 @@
 #profile{ role: 'main' }
   .row
     .six.columns
-      %h2 #{@view_user.display_name}'s Prompts
+      %h2 #{possessive_display_name @view_user} Prompts
       %ul
         - @view_user.prompts.each do |prompt|
           %li=link_to "#{prompt.content} (#{pluralize prompt.poems.count, "response"})", prompt_path(prompt)
 
     .six.columns
-      %h2 #{@view_user.display_name}'s Poems
+      %h2 #{possessive_display_name @view_user} Poems
       %ul
         - @view_user.poems.each do |poem|
           %li=link_to "#{poem.content}", poem_path(poem.prompt, poem)
+
+
+  - if @view_user == current_user
+    .row
+      .twelve.columns
+        %h2 My Settings
+    .row
+      .four.columns
+        %h3 Change my name
+        %small You are identified by your email address unless you wish to provide another name.
+        = text_field_tag :name, current_user.name, id: 'settings_name'
+      .four.columns
+        %h3 Change my email
+      .four.columns
+        %h3 Change my password

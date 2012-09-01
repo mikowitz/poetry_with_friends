@@ -5,10 +5,12 @@ Feature: Viewing user profiles
 
   Scenario: viewing my profile
     When I view my profile
-    Then I should see the header "My Poems"
-    And  I should see the header "My Prompts"
+    Then I should see "My Poems"
+    And  I should see "My Prompts"
+    And  I should see "My Settings"
 
   Scenario: viewing Jeffrey's profile
     When I view the profile for Jeffrey
-    Then I should see the header "Jeffrey's Poems"
-    And  I should see the header "Jeffrey's Prompts"
+    Then I should see "Jeffrey's Poems"
+    And  I should see "Jeffrey's Prompts"
+    And  I should not see "My Settings"

@@ -11,7 +11,7 @@ describe ProfileController do
   describe "GET 'index'" do
     it 'redirects to my home page' do
       get 'index'
-      response.should redirect_to root_path
+      response.should be_success
     end
   end
 
