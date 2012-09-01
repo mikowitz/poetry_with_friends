@@ -1,13 +1,21 @@
-= @prompt.content
+#prompt{ role: 'main' }
+  .row
+    .two.columns
+      %h2 Prompt:
+    .nine.columns.offset-by-one
+      .prompt-content
+        %h2= @prompt.content
 
-%h1 Responses
+  .row
+    .four.columns.centered
+      = link_to "Write your own", new_poem_path(@prompt)
 
-%ul
-  - @prompt.poems.each do |poem|
-    %li
-      = link_to truncate(poem.content), prompt_poem_path(@prompt.id, poem.id)
-      (by #{poem.user.email})
+  .row
+    .twelve.columns
+      %h2 Responses
 
-%hr/
-
-= link_to "Write a poem", new_prompt_poem_path(@prompt)
+      %ul
+        - @prompt.poems.each do |poem|
+          %li
+            = link_to truncate(poem.content), poem_path(@prompt.id, poem.id)
+            (by #{poem.user.email})

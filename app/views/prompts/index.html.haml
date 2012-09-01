@@ -1,7 +1,12 @@
-#prompts
-  = text_field_tag :prompt_search
+#prompts{ role: 'main' }
+  .row
+    .three.columns
+      = text_field_tag :prompt_search
 
-  %ul.prompts
-    = render :partial => 'prompt', :collection => @prompts
-    %li.no-matches
-      No prompts match your search...
+
+  .row
+    .seven.columns
+      %ul.prompts
+        = render :partial => 'prompt', :collection => @prompts
+        %li.no-matches
+          No prompts match your search...
