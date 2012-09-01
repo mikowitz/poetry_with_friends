@@ -1,4 +1,11 @@
-= link_to @poem.prompt.content, prompt_path(@poem.prompt)
+#poem{ role: 'main' }
+  .row
+    .two.columns
+      %h2 Prompt:
+    .nine.columns.offset-by-one
+      .prompt-content
+        %h2= link_to @presenter.prompt, '#'
 
-%pre
-  = @poem.content
+  .row
+    .eight.columns.offset-by-one
+      = @presenter.poem
