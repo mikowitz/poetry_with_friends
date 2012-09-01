@@ -1,18 +1,13 @@
 class UserFollowingsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_followed_user
 
-  def create
-    current_user.follow(@user)
-    render json: { user: { name: @user.name, id: @user.id }}
-  end
-
-  def destroy
-    current_user.unfollow(@user)
-    render json: { user: { name: @user.name, id: @user.id }}
-  end
-
-  def find_followed_user
-    @user = User.where(id: params[:followed_user_id]).first
+  def toggle
+    followed_user = User.where(:id => params[:followed_user_id]).first
+    if current_user.follows?(followed_user)
+      current_user.unfollow(followed_user)
+    else
+      current_user.follow(followed_user)
+    end
+    render json: { status: 200, content: render_to_string(partial: 'shared/user_following', locals: { user: followed_user })}
   end
 end

@@ -8,6 +8,7 @@ gem 'rails', '3.2.8'
 gem 'pg'
 gem 'devise'
 gem 'haml'
+gem 'thin'
 
 
 # Gems used only for assets and not required
@@ -57,4 +58,4 @@ end
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+ gem 'debugger'

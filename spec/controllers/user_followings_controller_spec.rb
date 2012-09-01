@@ -10,7 +10,7 @@ describe UserFollowingsController do
 
   describe "GET 'create'" do
     before do
-      post 'create', followed_user_id: jeffrey.id
+      post 'toggle', followed_user_id: jeffrey.id
     end
     it "returns http success" do
       response.should be_success
@@ -22,7 +22,7 @@ describe UserFollowingsController do
     before do
       michael.follow(jeffrey)
       michael.should follow(jeffrey)
-      delete 'destroy', followed_user_id: jeffrey.id
+      post 'toggle', followed_user_id: jeffrey.id
     end
     it "returns http success" do
       response.should be_success

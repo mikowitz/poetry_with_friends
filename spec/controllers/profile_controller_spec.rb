@@ -58,6 +58,5 @@ describe ProfileController do
     it 'should change my name' do
       me.reload.name.should == "alert(\"Michael!\");"
     end
-
   end
 end

@@ -4,7 +4,9 @@
       .six.columns
         %h2= @view_user.display_name
       .six.columns
-        = following_link(@view_user)
+        - unless @view_user == current_user
+          #following-link
+            = render partial: 'shared/user_following', locals: { user: @view_user }
 
   .row
     .six.columns

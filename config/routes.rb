@@ -1,12 +1,12 @@
 PoetryWithFriends::Application.routes.draw do
   devise_for :users
   resources :prompts, :poems
-  resources :user_followings, only: [:create, :destroy]
-  match 'user_followings/:followed_user_id' => 'user_followings#destroy'
 
   resources :profile do
     post 'change_name', on: :collection
   end
+  match 'user_followings/toggle/:followed_user_id' => 'user_followings#toggle',
+    :as => 'toggle_following'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
