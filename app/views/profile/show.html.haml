@@ -20,13 +20,11 @@
     .row
       .four.columns
         %h3 Change my name
-        %small You are identified by your email address unless you wish to provide another name.
-        .row
-          .nine.columns
-            = text_field_tag :name, current_user.name, id: 'settings_name'
-          .three.columns
-            %span.updated-mark
-              Updated!
+        %span.success.round.label.name-label
+          Name Updated!
+        %span.alert.round.label.name-label
+          Whoops...
+        = text_field_tag :name, current_user.name, id: 'settings_name'
       .four.columns
         %h3 Change my email
         TBI

@@ -3,20 +3,24 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(document).foundationAccordion
+$(document).foundationAlerts
 
 updateName = () ->
   $.ajax('/profile/change_name',
     type: 'POST',
     data: 'name=' + $('#settings_name').attr('value'),
-    success: (response) ->
-      $('#settings_name').attr('value', response.name).blur()
-      $('.updated-mark').show()
+    complete: (response) ->
+      if response.status == 200
+        $('#settings_name').attr('value', response.name)
+        $('.name-label.success').show()
+      else
+        $('#settings_name').attr('value', response.name)
+        $('.name-label.alert').show()
   )
-
 
 $(document).ready ->
   $(document).on 'focus', '#settings_name', (e) ->
-    $('.updated-mark').hide()
+    $('.name-label').hide()
 
   $(document).on 'keypress', '#settings_name', (e) ->
     updateName() if e.which == 13
