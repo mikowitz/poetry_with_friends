@@ -1,8 +1,9 @@
 PoetryWithFriends::Application.routes.draw do
   devise_for :users
-  resources :prompts
-  resources :poems
-  resources :profile
+  resources :prompts, :poems
+  resources :profile do
+    post 'change_name', on: :collection
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
