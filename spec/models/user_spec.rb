@@ -55,6 +55,10 @@ describe User do
       user.followers.should =~ [user3]
       user2.followers.should =~ [user]
       user3.followers.should =~ [user, user2]
+
+      user.unfollow(user2)
+      user.reload.followed_users.should =~ [user3]
+      user2.reload.followers.should be_empty
     end
   end
 

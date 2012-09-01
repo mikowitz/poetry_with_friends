@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20120901201612) do
   add_index "responses", ["user_id", "prompt_id"], :name => "index_responses_on_user_id_and_prompt_id"
   add_index "responses", ["user_id"], :name => "index_responses_on_user_id"
 
-  create_table "user_followings", :force => true do |t|
+  create_table "user_followings", :id => false, :force => true do |t|
     t.integer  "user_id",          :null => false
     t.integer  "followed_user_id", :null => false
     t.datetime "created_at",       :null => false

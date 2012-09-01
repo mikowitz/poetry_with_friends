@@ -24,7 +24,11 @@ class User < ActiveRecord::Base
   end
 
   def follow(user)
-    user_followings.create(followed_user: user)
+    followed_users << user if user && !follows?(user)
+  end
+
+  def unfollow(user)
+    followed_users.delete(user) if user && follows?(user)
   end
 
   def follows?(user)

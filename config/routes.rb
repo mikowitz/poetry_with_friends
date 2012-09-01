@@ -1,6 +1,9 @@
 PoetryWithFriends::Application.routes.draw do
   devise_for :users
   resources :prompts, :poems
+  resources :user_followings, only: [:create, :destroy]
+  match 'user_followings/:followed_user_id' => 'user_followings#destroy'
+
   resources :profile do
     post 'change_name', on: :collection
   end
