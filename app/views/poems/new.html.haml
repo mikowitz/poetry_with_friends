@@ -1,5 +1,8 @@
-= form_for [@prompt, @poem] do |f|
-  = render 'shared/error_messages', target: @poem
+.row
+  .twelve.columns
+    = form_for @poem do |f|
+      = render 'shared/error_messages', target: @poem
 
-  = f.text_area :content, rows: 20, cols: 50
-  = f.submit
+      = hidden_field_tag :prompt_id, @prompt.id
+      = f.text_area :content, rows: 20, cols: 50
+      = f.submit
