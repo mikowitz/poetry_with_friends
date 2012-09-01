@@ -37,4 +37,25 @@ describe User do
     end
   end
 
+  describe 'followings' do
+    let(:user2) { create :user }
+    let(:user3) { create :user }
+
+    it 'should be mapped correctly' do
+      user.follow(user2)
+      user.follow(user3)
+
+      user2.follow(user3)
+      user3.follow(user)
+
+      user.followed_users.should =~ [user2, user3]
+      user2.followed_users.should =~ [user3]
+      user3.followed_users.should =~ [user]
+
+      user.followers.should =~ [user3]
+      user2.followers.should =~ [user]
+      user3.followers.should =~ [user, user2]
+    end
+  end
+
 end

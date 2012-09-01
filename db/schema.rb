@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120831201850) do
+ActiveRecord::Schema.define(:version => 20120901201612) do
 
   create_table "poems", :force => true do |t|
     t.text     "content",    :null => false
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(:version => 20120831201850) do
   add_index "responses", ["prompt_id"], :name => "index_responses_on_prompt_id"
   add_index "responses", ["user_id", "prompt_id"], :name => "index_responses_on_user_id_and_prompt_id"
   add_index "responses", ["user_id"], :name => "index_responses_on_user_id"
+
+  create_table "user_followings", :force => true do |t|
+    t.integer  "user_id",          :null => false
+    t.integer  "followed_user_id", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "user_followings", ["user_id", "followed_user_id"], :name => "index_user_followings_on_user_id_and_followed_user_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

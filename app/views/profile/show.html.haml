@@ -1,13 +1,20 @@
 #profile{ role: 'main' }
+  - unless @view_user == current_user
+    .row
+      .six.columns
+        %h2= @view_user.display_name
+      .six.columns
+        = following_link(@view_user)
+
   .row
     .six.columns
-      %h2 #{possessive_display_name @view_user} Prompts
+      %h2 #{display_name_genitive @view_user} Prompts
       %ul
         - @view_user.prompts.each do |prompt|
           %li=link_to "#{prompt.content} (#{pluralize prompt.poems.count, "response"})", prompt_path(prompt)
 
     .six.columns
-      %h2 #{possessive_display_name @view_user} Poems
+      %h2 #{display_name_genitive @view_user} Poems
       %ul
         - @view_user.poems.each do |poem|
           %li=link_to "#{poem.content}", poem_path(poem.prompt, poem)

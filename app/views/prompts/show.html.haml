@@ -18,4 +18,4 @@
         - @prompt.poems.each do |poem|
           %li
             = link_to truncate(poem.content), poem_path(@prompt.id, poem.id)
-            (by #{poem.user.email})
+            (by #{link_to display_name_accusative(poem.user), profile_path(poem.user)})
