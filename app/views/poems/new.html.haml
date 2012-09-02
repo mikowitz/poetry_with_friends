@@ -1,4 +1,10 @@
 .row
+  .three.columns
+    %h2 Prompt:
+  .nine.columns
+    %h3= @prompt.content
+
+.row
   .twelve.columns
     = form_for @poem do |f|
       = render 'shared/error_messages', target: @poem
