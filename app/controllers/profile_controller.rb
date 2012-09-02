@@ -14,10 +14,7 @@ class ProfileController < ApplicationController
   end
 
   def change_name
-    if current_user.update_attributes(name: strip_tags(params[:name]))
-      render json: { status: 200, name: current_user.reload.name }
-    else
-      render json: { status: 409, nothing: true }
-    end
+    current_user.update_attributes(name: strip_tags(params[:name]))
+    render json: { status: 200, name: current_user.reload.name }
   end
 end

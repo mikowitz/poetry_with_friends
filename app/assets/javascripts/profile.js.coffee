@@ -22,9 +22,6 @@ $(document).ready ->
   $(document).on 'focus', '#settings_name', (e) ->
     $('.name-label').hide()
 
-  $(document).on 'keypress', '#settings_name', (e) ->
-    updateName() if e.which == 13
-
   $(document).on 'blur', '#settings_name', (e) ->
     updateName()
 
