@@ -1,4 +1,8 @@
-= link_to @poem.prompt.content, prompt_path(@poem.prompt)
-
 %pre
   = @poem.content
+
+%span.data
+  By
+  = link_to display_name_accusative(@poem.user), profile_path(@poem.user)
+  for the prompt
+  = link_to @poem.prompt.content, prompt_path(@poem.prompt)
