@@ -1,12 +1,11 @@
 #profile{ role: 'main' }
-  - unless @view_user == current_user
+  - unless viewing_self?
     .row
       .six.columns
         %h2= @view_user.display_name
       .six.columns
-        - unless viewing_self?
-          #following-link
-            = render partial: 'shared/user_following', locals: { user: @view_user }
+        #following-link
+          = render partial: 'shared/user_following', locals: { user: @view_user }
 
   .row
     .six.columns
