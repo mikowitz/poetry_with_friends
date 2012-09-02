@@ -5,8 +5,7 @@ PoetryWithFriends::Application.routes.draw do
   resources :profile do
     post 'change_name', on: :collection
   end
-  match 'user_followings/toggle/:followed_user_id' => 'user_followings#toggle',
-    :as => 'toggle_following'
+  match 'user_followings/toggle' => 'user_followings#toggle'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

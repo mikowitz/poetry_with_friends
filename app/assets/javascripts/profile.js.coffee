@@ -27,7 +27,7 @@ $(document).ready ->
 
   $(document).on 'click', 'a.user-follow-link', (e) ->
     e.preventDefault()
-    $.ajax('/profile/toggle_following',
+    $.ajax('/user_followings/toggle',
       type: "POST"
       data: "followed_user_id=" + $(this).data('user-id')
       complete: (response) ->
