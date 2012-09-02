@@ -4,7 +4,7 @@
       .six.columns
         %h2= @view_user.display_name
       .six.columns
-        - unless @view_user == current_user
+        - unless viewing_self?
           #following-link
             = render partial: 'shared/user_following', locals: { user: @view_user }
 
@@ -14,6 +14,8 @@
       %ul
         - @view_user.prompts.each do |prompt|
           %li=link_to "#{prompt.content} (#{pluralize prompt.poems.count, "response"})", prompt_path(prompt)
+        - if viewing_self?
+          %li= link_to "Create a new prompt", new_prompt_path
 
     .six.columns
       %h2 #{display_name_genitive @view_user} Poems
@@ -22,7 +24,7 @@
           %li=link_to "#{poem.content}", poem_path(poem.prompt, poem)
 
 
-  - if @view_user == current_user
+  - if viewing_self?
     .row
       .twelve.columns
         %h2 My Settings
