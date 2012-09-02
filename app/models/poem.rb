@@ -6,4 +6,9 @@ class Poem < ActiveRecord::Base
   validates_presence_of :content
 
   scope :for, lambda {|prompt| where('prompt_id = ?', prompt.id).order('created_at DESC') }
+
+  def first_line
+    return content if content.scan(/\n/).empty?
+    content.scan(/.*\n/).first.strip
+  end
 end

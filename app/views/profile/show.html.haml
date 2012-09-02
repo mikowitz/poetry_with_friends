@@ -21,24 +21,15 @@
       %h2 #{display_name_genitive @view_user} Poems
       %ul
         - @view_user.poems.each do |poem|
-          %li=link_to "#{poem.content}", poem_path(poem.prompt, poem)
+          %li=link_to "#{poem.first_line}", poem_path(poem)
 
+  .row
+    .twelve.columns
+      %h2 #{display_name_genitive @view_user} Followed Users
+
+      %ul
+        - @view_user.followed_users.each do |user|
+          %li= link_to user.display_name, profile_path(user)
 
   - if viewing_self?
-    .row
-      .twelve.columns
-        %h2 My Settings
-    .row
-      .four.columns
-        %h3 Change my name
-        %span.success.round.label.name-label
-          Name Updated!
-        %span.alert.round.label.name-label
-          Whoops...
-        = text_field_tag :name, current_user.name, id: 'settings_name'
-      .four.columns
-        %h3 Change my email
-        TBI
-      .four.columns
-        %h3 Change my password
-        TBI
+    = render partial: 'profile/settings'
