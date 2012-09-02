@@ -229,4 +229,4 @@ DEPENDENCIES
   thin
   turnip
   uglifier (>= 1.0.3)
-  zurb-foundation (~> 3.0.9)
+  zurb-foundation (~> 3.0.6)
