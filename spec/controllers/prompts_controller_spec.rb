@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe PromptsController do
+  render_views
   let(:user) { create :user }
 
   before(:each) do
@@ -49,6 +50,22 @@ describe PromptsController do
       it "should reload the form" do
         post 'create', prompt: {content: ""}
         response.should be_success
+      end
+    end
+  end
+
+  describe "searching" do
+    20.times do |i|
+      class_eval <<-RUBY
+        let!(:prompt#{i}) { create :prompt, content: "Prompt #{i}" }
+      RUBY
+    end
+
+    it "returns correct results for a search" do
+      get 'index', :query => 'Prompt 1'
+      response.should be_success
+      Array(10..19).unshift(1).each do |n|
+        response.body.should =~ /Prompt #{n}/u
       end
     end
   end

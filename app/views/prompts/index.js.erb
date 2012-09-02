@@ -1,0 +1,2 @@
+$('ul.prompts').html('<%= escape_javascript render(@prompts) %>');
+$('#prompt-paginator').html('<%= escape_javascript(paginate(@prompts, remote: true).to_s) %>');
