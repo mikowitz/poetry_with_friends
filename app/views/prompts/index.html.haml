@@ -1,11 +1,12 @@
 #prompts{ role: 'main' }
   .row
-    .three.columns
-      = text_field_tag :prompt_search
-
+    .four.columns
+      %label{ for: 'prompt_search' }
+        Search for a prompt:
+        = text_field_tag :prompt_search
 
   .row
-    .seven.columns
+    .twelve.columns
       %ul.prompts
         = render :partial => 'prompt', :collection => @prompts
         %li.no-matches
