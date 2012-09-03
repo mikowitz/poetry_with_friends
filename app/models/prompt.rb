@@ -4,4 +4,11 @@ class Prompt < ActiveRecord::Base
   belongs_to :user
   has_many :poems
   validates_presence_of :content
+
+  scope :newest_first, lambda { order('created_at DESC') }
+
+  scope :that_match, lambda {|query|
+    return unless query.present?
+    where(Prompt.arel_table[:content].matches("%#{query}%"))
+  }
 end

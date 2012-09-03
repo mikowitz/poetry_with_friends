@@ -55,17 +55,28 @@ describe PromptsController do
   end
 
   describe "searching" do
-    20.times do |i|
-      class_eval <<-RUBY
-        let!(:prompt#{i}) { create :prompt, content: "Prompt #{i}" }
-      RUBY
+    before do
+      20.times do |i|
+        create :prompt, content: "Prompt #{i + 1}x"
+      end
+    end
+
+    it "returns everything when no query is passed" do
+      get 'index'
+      response.should be_success
+      Array(1..20).each do |n|
+        response.body.should =~ /Prompt #{n}x/u
+      end
     end
 
     it "returns correct results for a search" do
       get 'index', :query => 'Prompt 1'
       response.should be_success
       Array(10..19).unshift(1).each do |n|
-        response.body.should =~ /Prompt #{n}/u
+        response.body.should =~ /Prompt #{n}x/u
+      end
+      Array(2..9).unshift(20).each do |n|
+        response.body.should_not =~ /Prompt #{n}x/u
       end
     end
   end
