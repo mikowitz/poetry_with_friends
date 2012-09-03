@@ -8,7 +8,7 @@ describe UserFollowingsController do
     sign_in michael
   end
 
-  describe "GET 'create'" do
+  describe "start following a user" do
     before do
       post 'toggle', followed_user_id: jeffrey.id
     end
@@ -18,7 +18,7 @@ describe UserFollowingsController do
     it { michael.should follow(jeffrey) }
   end
 
-  describe "GET 'destroy'" do
+  describe "stop following a user" do
     before do
       michael.follow(jeffrey)
       michael.should follow(jeffrey)

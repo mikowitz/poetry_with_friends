@@ -41,21 +41,27 @@ describe User do
     let(:user2) { create :user }
     let(:user3) { create :user }
 
-    it 'should be mapped correctly' do
+    before do
       user.follow(user2)
       user.follow(user3)
 
       user2.follow(user3)
       user3.follow(user)
+    end
 
+    it '#followed_users' do
       user.followed_users.should =~ [user2, user3]
       user2.followed_users.should =~ [user3]
       user3.followed_users.should =~ [user]
+    end
 
+    it '#followers' do
       user.followers.should =~ [user3]
       user2.followers.should =~ [user]
       user3.followers.should =~ [user, user2]
+    end
 
+    it 'unfollowing' do
       user.unfollow(user2)
       user.reload.followed_users.should =~ [user3]
       user2.reload.followers.should be_empty

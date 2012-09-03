@@ -3,7 +3,7 @@ class Poem < ActiveRecord::Base
   belongs_to :user
   attr_accessible :content
 
-  validates_presence_of :content
+  validates_presence_of :content, :user_id, :prompt_id
 
   scope :for, lambda {|prompt| where('prompt_id = ?', prompt.id).order('created_at DESC') }
 

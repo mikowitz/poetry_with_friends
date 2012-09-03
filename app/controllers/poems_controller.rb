@@ -1,6 +1,7 @@
 class PoemsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :get_prompt
+  before_filter :authenticate_poem_owner!, only: [:edit, :update]
+  before_filter :build_new_poem, only: [:new, :create]
 
   def index
     @poems = Poem.order('created_at DESC')
@@ -11,13 +12,9 @@ class PoemsController < ApplicationController
   end
 
   def new
-    @poem = @prompt.poems.new(params[:poem])
   end
 
   def create
-    @poem = @prompt.poems.new(params[:poem])
-    @poem.prompt = @prompt
-    @poem.user = current_user
     if @poem.save
       redirect_to poem_path(@poem)
     else
@@ -26,21 +23,26 @@ class PoemsController < ApplicationController
   end
 
   def edit
-    @poem = Poem.where(id: params[:id]).first()
   end
 
   def update
-    @poem = Poem.find_by_id(params[:id])
     if @poem.update_attributes(params[:poem])
       redirect_to poem_path(@poem)
     else
-      render :new
+      render :edit
     end
   end
 
   private
 
-  def get_prompt
-    @prompt = Prompt.find_by_id(params[:prompt_id])
+  def authenticate_poem_owner!
+    @poem = current_user.poems.where(id: params[:id]).first
+    redirect_to poem_path(params[:id]) unless @poem
+  end
+
+  def build_new_poem
+    @prompt = Prompt.where(id: params[:prompt_id]).first
+    redirect_to poems_path unless @prompt
+    @poem = current_user.poems.where(prompt_id: @prompt).new(params[:poem])
   end
 end

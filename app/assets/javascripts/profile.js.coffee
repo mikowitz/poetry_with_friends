@@ -17,12 +17,5 @@ $(document).ready ->
 
   $(document).on 'click', 'a.user-follow-link', (e) ->
     e.preventDefault()
-    $.ajax('/user_followings/toggle',
-      type: "POST"
-      data: "followed_user_id=" + $(this).data('user-id')
-      complete: (response) ->
-        response = $.parseJSON(response.responseText)
-        if response.status == 200
-          $('#following-link').html(response.content)
-          $('#following-link').effect('highlight')
-    )
+    $.post('/user_followings/toggle', "followed_user_id=" + $(this).data('user-id'),
+      null, 'script')
