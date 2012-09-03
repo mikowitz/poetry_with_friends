@@ -3,7 +3,7 @@
     .content
       =link_to prompt.content, prompt_path(prompt)
       (#{pluralize(prompt.poems.count, "response")})
-    - if current_user.poems.for(prompt).any?
-      - latest = current_user.poems.for(prompt).first
+    - latest = current_user.poems.for(prompt).first
+    - if latest
       .response-time
-        %em= link_to "(you last responded on #{latest.created_at})", poem_path(prompt, latest)
+        %em= link_to "(you last responded on #{latest.created_at})", poem_path(latest)
