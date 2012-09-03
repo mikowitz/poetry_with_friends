@@ -11,12 +11,11 @@ class PoemsController < ApplicationController
   end
 
   def new
-    @poem = current_user.poems.new(params[:poem])
+    @poem = current_user.poems.where(prompt_id: @prompt).new(params[:poem])
   end
 
   def create
-    @poem = current_user.poems.new(params[:poem])
-    @poem.prompt = @prompt
+    @poem = current_user.poems.where(prompt_id: @prompt).new(params[:poem])
     if @poem.save
       redirect_to poem_path(@poem)
     else
