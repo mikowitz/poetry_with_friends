@@ -10,17 +10,17 @@
   .row
     .six.columns
       %h2 #{display_name_genitive @view_user} Prompts
-      %ul
-        - @view_user.prompts.each do |prompt|
-          %li=link_to "#{prompt.content} (#{pluralize prompt.poems.count, "response"})", prompt_path(prompt)
-        - if viewing_self?
-          %li= link_to "Create a new prompt", new_prompt_path
+      #prompt-paginator
+        = paginate @prompts, param_name: :prompt_page, remote: true
+      %ul#prompt-list
+        = render @prompts
 
     .six.columns
       %h2 #{display_name_genitive @view_user} Poems
-      %ul
-        - @view_user.poems.each do |poem|
-          %li=link_to "#{poem.first_line}", poem_path(poem)
+      #poem-paginator
+        = paginate @poems, param_name: :poem_page, remote: true
+      %ul#poem-list
+        = render @poems
 
   .row
     .twelve.columns

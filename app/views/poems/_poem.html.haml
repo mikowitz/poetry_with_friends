@@ -1,1 +1,6 @@
-%li= poem.first_line
+%li.poem
+  .panel.radius
+    .first-line
+      = link_to poem.first_line, poem_path(poem)
+    .author
+      by #{link_to display_name_accusative(poem.user), profile_path(poem.user)}

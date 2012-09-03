@@ -1,0 +1,5 @@
+$("#poem-paginator").html("#{escape_javascript(paginate(@poems, param_name: :poem_page, remote: true).to_s)}")
+$("#poem-list").html("#{escape_javascript(render @poems)}")
+
+$("#prompt-paginator").html("#{escape_javascript(paginate(@prompts, param_name: :prompt_page, remote: true).to_s)}")
+$("#prompt-list").html("#{escape_javascript(render @prompts)}")
