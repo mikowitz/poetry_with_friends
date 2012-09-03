@@ -5,18 +5,8 @@
 $(document).foundationAlerts
 
 updateName = () ->
-  $.ajax('/profile/change_name',
-    type: 'POST',
-    data: 'name=' + $('#settings_name').attr('value'),
-    complete: (response) ->
-      response = $.parseJSON(response.responseText)
-      if response.status == 200
-        $('#settings_name').attr('value', response.name)
-        $('.name-label.success').show()
-      else
-        $('#settings_name').attr('value', response.name)
-        $('.name-label.alert').show()
-  )
+  data = 'name=' + $('#settings_name').attr('value')
+  $.post('/profile/change_name', data, null, 'script')
 
 $(document).ready ->
   $(document).on 'focus', '#settings_name', (e) ->

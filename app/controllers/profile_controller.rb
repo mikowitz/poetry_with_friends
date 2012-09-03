@@ -14,7 +14,7 @@ class ProfileController < ApplicationController
   end
 
   def change_name
-    current_user.update_attributes(name: strip_tags(params[:name]))
-    render json: { status: 200, name: current_user.reload.name }
+    @success = current_user.update_attributes(name: strip_tags(params[:name]))
+    render partial: '/profile/change_name', formats: [:js]
   end
 end
