@@ -8,7 +8,7 @@
 
   .row
     .four.columns.centered
-      = link_to "Write your own", new_poem_path(@prompt)
+      = link_to "Write your own", new_poem_path(prompt_id: @prompt)
 
   .row
     .twelve.columns
@@ -17,5 +17,5 @@
       %ul
         - @prompt.poems.each do |poem|
           %li
-            = link_to truncate(poem.content), poem_path(@prompt.id, poem.id)
-            (by #{poem.user.email})
+            = link_to truncate(poem.content), poem_path(poem.id)
+            (by #{link_to display_name_accusative(poem.user), profile_path(poem.user)})

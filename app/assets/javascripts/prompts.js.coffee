@@ -1,11 +1,10 @@
 $(document).ready ->
-  $(document).on 'keyup', 'input#prompt_search', ->
-    $("li.no-matches").removeClass('match')
-    match = $(this).val().toLowerCase()
-    if match == ''
-      $('li.prompt').removeClass('no-match match')
+  $(document).on 'keyup', 'input#query', ->
+    form = this.form
+    $.get(form.action, $(form).serialize(), null, 'script')
+
+  $(document).on 'search-results', ->
+    if $('li.prompt').length == 0
+      $('.no-prompts').show()
     else
-      $("li.prompt[name*='#{match}']").addClass('match').removeClass('no-match')
-      $("li.prompt:not([name*='#{match}'])").addClass('no-match').removeClass('match')
-      if $("li.prompt:visible").length == 0
-        $("li.no-matches").addClass('match')
+      $('.no-prompts').hide()

@@ -1,0 +1,22 @@
+.row
+  .twelve.columns
+    %h2 My Settings
+.row
+  .three.columns.offset-by-one
+    %label{for: 'settings_name', style: 'text-align:right;'}
+      %h4
+        Change my name
+  .four.columns
+    = text_field_tag :name, current_user.name, id: 'settings_name'
+  .one.offset-by-eight
+    %span.success.round.label.name-label
+      Name Updated!
+    %span.alert.round.label.name-label
+      Uh oh...
+.row
+  .four.columns
+    %h3 Change my email
+    TBI
+  .four.columns
+    %h3 Change my password
+    TBI

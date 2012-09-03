@@ -49,6 +49,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
+    columnize (0.3.6)
     compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -56,6 +57,14 @@ GEM
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
     configuration (1.3.1)
+    daemons (1.1.4)
+    debugger (1.2.0)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.1.1)
+      debugger-ruby_core_source (~> 1.1.3)
+    debugger-linecache (1.1.2)
+      debugger-ruby_core_source (>= 1.1.1)
+    debugger-ruby_core_source (1.1.3)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -63,6 +72,7 @@ GEM
       warden (~> 1.2.1)
     diff-lcs (1.1.3)
     erubis (2.7.0)
+    eventmachine (0.12.10)
     execjs (1.4.0)
       multi_json (~> 1.0)
     factory_girl (4.0.0)
@@ -82,12 +92,15 @@ GEM
       guard (>= 1.1)
     haml (3.1.7)
     hike (1.2.1)
-    i18n (0.6.0)
+    i18n (0.6.1)
     journey (1.0.4)
     jquery-rails (2.1.1)
       railties (>= 3.1.0, < 5.0)
       thor (~> 0.14)
     json (1.7.5)
+    kaminari (0.14.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     launchy (0.3.7)
       configuration (>= 0.0.5)
       rake (>= 0.8.1)
@@ -170,6 +183,10 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    thin (1.3.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
     thor (0.16.0)
     tilt (1.3.3)
     treetop (1.4.10)
@@ -199,6 +216,7 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 3.2.1)
   compass-rails (~> 1.0.3)
+  debugger
   devise
   factory_girl_rails
   growl
@@ -206,11 +224,13 @@ DEPENDENCIES
   guard-rspec
   haml
   jquery-rails
+  kaminari
   launchy
   pg
   rails (= 3.2.8)
   rspec-rails
   sass-rails (~> 3.2.3)
+  thin
   turnip
   uglifier (>= 1.0.3)
-  zurb-foundation (~> 3.0.9)
+  zurb-foundation (~> 3.0.6)

@@ -13,7 +13,25 @@ class User < ActiveRecord::Base
   has_many :poems
   has_many :answered_prompts, through: :poems, source: :prompt
 
+  has_many :user_followings
+  has_many :followed_users, through: :user_followings, foreign_key: :user_id
+  has_many :user_followings_for_followers, foreign_key: :followed_user_id, class_name: 'UserFollowing'
+  has_many :followers, through: :user_followings_for_followers, foreign_key: :followed_user_id,
+    source: :user
+
   def display_name
     name || email
+  end
+
+  def follow(user)
+    followed_users << user if user && !follows?(user)
+  end
+
+  def unfollow(user)
+    followed_users.delete(user) if user && follows?(user)
+  end
+
+  def follows?(user)
+    followed_users.include? user
   end
 end

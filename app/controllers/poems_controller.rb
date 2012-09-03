@@ -3,6 +3,7 @@ class PoemsController < ApplicationController
   before_filter :get_prompt
 
   def index
+    @poems = Poem.order('created_at DESC')
   end
 
   def show

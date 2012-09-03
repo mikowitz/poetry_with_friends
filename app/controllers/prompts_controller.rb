@@ -2,7 +2,12 @@ class PromptsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @prompts = Prompt.order('created_at DESC')
+    if params[:query] && params[:query] == ""
+      @prompts = Prompt.order('created_at DESC').page(params[:page])
+    else
+      @prompts = Prompt.where(Prompt.arel_table[:content].matches("%#{params[:query]}%")).
+        order('created_at DESC').page(params[:page])
+    end
   end
 
   def show

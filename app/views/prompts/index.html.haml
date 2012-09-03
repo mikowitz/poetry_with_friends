@@ -1,12 +1,16 @@
 #prompts{ role: 'main' }
   .row
-    .three.columns
-      = text_field_tag :prompt_search
-
+    .four.columns
+      = form_tag '/prompts', method: :get, id: 'prompt_search_form', remote: true do
+        = label_tag :query, "Search for a prompt"
+        = text_field_tag :query, '', autocomplete: 'off'
 
   .row
-    .seven.columns
-      %ul.prompts
-        = render :partial => 'prompt', :collection => @prompts
-        %li.no-matches
-          No prompts match your search...
+    .twelve.columns
+      #prompt-list
+        #prompt-paginator
+          = paginate @prompts, remote: true
+        %ul.prompts
+          = render @prompts
+        %span.no-prompts
+          Sorry, no prompts matched your search.

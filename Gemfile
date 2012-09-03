@@ -8,7 +8,9 @@ gem 'rails', '3.2.8'
 gem 'pg'
 gem 'devise'
 gem 'haml'
+gem 'thin'
 
+gem 'kaminari'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -18,11 +20,10 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
+  gem 'compass-rails', '~> 1.0.3'
+  gem 'zurb-foundation', '~> 3.0.6'
 
   gem 'uglifier', '>= 1.0.3'
-
-  gem 'compass-rails', '~> 1.0.3'
-  gem 'zurb-foundation', '~> 3.0.9'
 end
 
 gem 'jquery-rails'
@@ -57,4 +58,4 @@ end
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+ gem 'debugger'

@@ -1,8 +1,11 @@
 PoetryWithFriends::Application.routes.draw do
   devise_for :users
-  resources :prompts
-  resources :poems
-  resources :profile
+  resources :prompts, :poems
+
+  resources :profile do
+    post 'change_name', on: :collection
+  end
+  match 'user_followings/toggle' => 'user_followings#toggle'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -53,7 +56,7 @@ PoetryWithFriends::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'home#index'
+  root :to => 'profile#index'
 
   # See how all your routes lay out with "rake routes"
 

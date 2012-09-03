@@ -1,0 +1,5 @@
+$('#settings_name').attr('value', '#{escape_javascript current_user.name}')
+- if @success
+  $('.name-label.success').show()
+- else
+  $('.name-label.alert').show()

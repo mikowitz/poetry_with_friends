@@ -3,11 +3,9 @@ step "I view my profile" do
 end
 
 step "I view the profile for :name" do |name|
-  visit "/profile/#{User.where(:name => name).first.id}"
+  visit "/profile/#{User.where(name: name).first.id}"
 end
 
-step "I should see the header :header" do |header|
-  within('#profile') do
-    page.should have_content(header)
-  end
+step "I follow :name" do |name|
+  @user.follow(User.where(name: name).first)
 end

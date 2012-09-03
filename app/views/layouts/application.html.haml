@@ -11,8 +11,8 @@
       - if user_signed_in?
         %li.greeting Hello #{current_user.email}
         %li= link_to "Home", root_path
-        %li= link_to "Log out", destroy_user_session_path
-        %li= link_to "All prompts", prompts_path
+        %li= link_to "Log out", destroy_user_session_path, method: :delete
+        %li= link_to "Prompts", prompts_path
       - else
         %li= link_to "Log in", new_user_session_path
 

@@ -11,7 +11,7 @@ describe ProfileController do
   describe "GET 'index'" do
     it 'redirects to my home page' do
       get 'index'
-      response.should redirect_to root_path
+      response.should be_success
     end
   end
 
@@ -27,6 +27,36 @@ describe ProfileController do
         get 'show', id: other.id
         response.should be_success
       end
+    end
+  end
+
+  describe "POST 'change_name'" do
+    before do
+      me.name.should be_nil
+      post 'change_name', name: "Michael"
+    end
+
+    it 'is a success' do
+      response.should be_success
+    end
+
+    it 'should change my name' do
+      me.reload.name.should == "Michael"
+    end
+  end
+
+  describe "should protect against JS injection" do
+    before do
+      me.name.should be_nil
+      post 'change_name', name: "<script type='text/javascript>alert(\"Michael!\");</script>"
+    end
+
+    it 'is a success' do
+      response.should be_success
+    end
+
+    it 'should change my name' do
+      me.reload.name.should == "alert(\"Michael!\");"
     end
   end
 end
