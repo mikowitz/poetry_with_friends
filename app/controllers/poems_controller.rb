@@ -8,7 +8,7 @@ class PoemsController < ApplicationController
   end
 
   def show
-    @poem = Poem.where(id: params[:id]).first
+    @presenter = PoemPresenter.for(params[:id])
   end
 
   def new
