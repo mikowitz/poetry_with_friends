@@ -22,7 +22,8 @@ class PoemPresenter
 
   def poem
     content_tag(:div, class: 'poem') do
-      strip_tags(@poem.content).split("\n\n").map {|stanza| format_stanza(stanza) }.join("\n\n").html_safe
+      strip_tags(@poem.content).gsub(/\r/, "").
+        split("\n\n").map {|stanza| format_stanza(stanza) }.join("\n\n").html_safe
     end
   end
 
