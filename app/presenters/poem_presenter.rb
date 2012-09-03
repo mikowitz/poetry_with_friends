@@ -1,5 +1,7 @@
 class PoemPresenter
   include ActionView::Helpers::TagHelper
+  include ActionView::Helpers::SanitizeHelper
+
   attr_accessor :output_buffer
 
   def self.for(poem)
@@ -11,14 +13,20 @@ class PoemPresenter
   end
 
   def prompt
-    @poem.prompt.content
+    @poem.prompt
+  end
+
+  def author
+    @poem.user
   end
 
   def poem
     content_tag(:div, class: 'poem') do
-      @poem.content.split("\n\n").map {|stanza| format_stanza(stanza) }.join("\n\n").html_safe
+      strip_tags(@poem.content).split("\n\n").map {|stanza| format_stanza(stanza) }.join("\n\n").html_safe
     end
   end
+
+  private
 
   def format_stanza(stanza)
     content_tag(:ol, class: 'stanza') do
