@@ -1,7 +1,7 @@
 class PoemsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :authenticate_poem_owner!, only: [:edit, :update]
-  before_filter :get_prompt, only: [:new, :create]
+  before_filter :build_new_poem, only: [:new, :create]
 
   def index
   end
@@ -15,7 +15,6 @@ class PoemsController < ApplicationController
   end
 
   def create
-    @poem = current_user.poems.where(prompt_id: @prompt).new(params[:poem])
     if @poem.save
       redirect_to poem_path(@poem)
     else
@@ -41,7 +40,9 @@ class PoemsController < ApplicationController
     redirect_to poem_path(params[:id]) unless @poem
   end
 
-  def get_prompt
+  def build_new_poem
     @prompt = Prompt.where(id: params[:prompt_id]).first
+    redirect_to poems_path unless @prompt
+    @poem = current_user.poems.where(prompt_id: @prompt).new(params[:poem])
   end
 end

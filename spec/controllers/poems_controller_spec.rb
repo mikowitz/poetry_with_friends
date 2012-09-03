@@ -27,6 +27,11 @@ describe PoemsController do
       get 'new', prompt_id: prompt.id
       response.should be_success
     end
+
+    it "redirects to /poems if you pass in a bad prompt_id" do
+      get 'new', prompt_id: -100
+      response.should redirect_to poems_path
+    end
   end
 
   describe "POST 'create'" do
@@ -59,6 +64,17 @@ describe PoemsController do
         response.should render_template 'new'
       end
     end
+
+    describe "for a nonexistent prompt" do
+      before do
+        post 'create', prompt_id: -100, poem: {content: ""}
+      end
+
+      it "should re-render the new form" do
+        response.should redirect_to poems_path
+      end
+    end
+
   end
 
   describe 'editing poems written by the current user' do
