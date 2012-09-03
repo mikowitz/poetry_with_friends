@@ -15,11 +15,11 @@ class PromptsController < ApplicationController
   end
 
   def new
-    @prompt = Prompt.new
+    @prompt = current_user.prompts.new
   end
 
   def create
-    @prompt = Prompt.create(params[:prompt].merge(user_id: current_user.id))
+    @prompt = current_user.prompts.create(params[:prompt])
     if @prompt.save
       redirect_to prompt_path(@prompt)
     else
