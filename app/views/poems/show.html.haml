@@ -7,8 +7,10 @@
     .four.columns.author
       By #{link_to display_name_accusative(@presenter.author), profile_path(@presenter.author)}
 
+      - if @presenter.belongs_to?(current_user)
+        = link_to "Edit my poem", edit_poem_path(@presenter.poem_object)
+
     .four.columns.prompt
       %h6 For the #{link_to "prompt", prompt_path(@presenter.prompt)}:
       .prompt-content
         = @presenter.prompt.content
-

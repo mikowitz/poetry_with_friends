@@ -26,6 +26,14 @@ class PoemPresenter
     end
   end
 
+  def poem_object
+    @poem
+  end
+
+  def belongs_to?(user)
+    user.poems.include? @poem
+  end
+
   private
 
   def format_stanza(stanza)
