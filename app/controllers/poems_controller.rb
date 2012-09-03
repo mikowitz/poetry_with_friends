@@ -11,7 +11,6 @@ class PoemsController < ApplicationController
   end
 
   def new
-    @poem = current_user.poems.where(prompt_id: @prompt).new(params[:poem])
   end
 
   def create
