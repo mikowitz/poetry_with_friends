@@ -11,4 +11,18 @@ describe Poem do
     it { poems.for(prompt1).should == [poem, poem2] }
     it { poems.for(prompt2).should be_empty }
   end
+
+  describe 'validations' do
+    it "needs a user" do
+      build(:poem, user_id: nil).should_not be_valid
+    end
+
+    it "needs a prompt" do
+      build(:poem, prompt_id: nil).should_not be_valid
+    end
+
+    it "needs content" do
+      build(:poem, content: "").should_not be_valid
+    end
+  end
 end

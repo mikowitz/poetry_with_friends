@@ -3,7 +3,8 @@ class Prompt < ActiveRecord::Base
 
   belongs_to :user
   has_many :poems
-  validates_presence_of :content
+
+  validates_presence_of :content, :user_id
 
   scope :newest_first, lambda { order('created_at DESC') }
 

@@ -16,4 +16,14 @@ describe Prompt do
       Prompt.that_match(nil).newest_first.should == [youngest, middle, oldest]
     end
   end
+
+  describe 'validations' do
+    it 'needs a user' do
+      build(:prompt, user_id: nil).should_not be_valid
+    end
+
+    it 'needs content' do
+      build(:prompt, content: "").should_not be_valid
+    end
+  end
 end
