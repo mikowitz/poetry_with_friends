@@ -34,4 +34,8 @@ class User < ActiveRecord::Base
   def follows?(user)
     followed_users.include? user
   end
+
+  def toggle_following(user)
+    follows?(user) ? unfollow(user) : follow(user)
+  end
 end

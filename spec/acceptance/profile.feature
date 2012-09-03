@@ -5,20 +5,13 @@ Feature: Viewing user profiles
 
   Scenario: viewing my profile
     When I view my profile
-    Then I should see "My Poems"
-    And  I should see "My Prompts"
-    And  I should see "My Settings"
-    And  I should not see "Follow Michael"
-    And  I should not see "Stop following Michael"
+    And  I should not be able to follow myself
 
   Scenario: viewing Jeffrey's profile
-    When I view the profile for Jeffrey
-    Then I should see "Jeffrey's Poems"
-    And  I should see "Jeffrey's Prompts"
-    And  I should not see "My Settings"
-    But  I should see "Follow Jeffrey"
+    When  I view the profile for Jeffrey
+    Then  I should be able to follow Jeffrey
 
   Scenario: following Jeffrey
     Given I follow Jeffrey
     When I view the profile for Jeffrey
-    Then I should see "Stop following Jeffrey"
+    Then I should be able to stop following Jeffrey

@@ -1,4 +1,0 @@
-- if current_user.follows?(user)
-  = link_to "Stop following #{user.display_name}", '#', class: 'user-follow-link', data: { user_id: user.id }
-- else
-  = link_to "Follow #{user.display_name}", '#', class: 'user-follow-link', data: { user_id: user.id }
